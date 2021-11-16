@@ -23,10 +23,11 @@ DigitalOut * findPinTorpedo(uint8_t data){
 
   DigitalOut *pin=NULL;
 
+//TODO change pin for correct ones (after competition)
   switch (data)
   {
   case DATA_IO_TORPEDO_PORT:
-    pin = &TorpedoStarboard;
+    pin = &TorpedoPort;
     break;
   
   case DATA_IO_TORPEDO_STARBOARD:
@@ -41,6 +42,7 @@ DigitalOut * findPinTorpedo(uint8_t data){
   return pin;
 }
 
+//TODO change pin for correct ones (after competition)
 DigitalOut * findPinDropper(uint8_t data){
 
   DigitalOut *pin=NULL;
@@ -48,11 +50,8 @@ DigitalOut * findPinDropper(uint8_t data){
   switch (data)
   {
   case DATA_IO_DROPPER_STARBOARD:
-    pin = &DropperStarboard;
-    break;
-  
   case DATA_IO_DROPPER_PORT:
-    pin = &DropperPort;
+    pin = &TorpedoStarboard;
     break;
   
   default:
