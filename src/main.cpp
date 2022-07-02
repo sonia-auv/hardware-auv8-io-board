@@ -46,7 +46,6 @@ DigitalOut * findPinTorpedo(uint8_t data){
   return pin;
 }
 
-//TODO change pin for correct ones (after competition)
 DigitalOut * findPinDropper(uint8_t data){
 
   DigitalOut *pin=NULL;
@@ -54,8 +53,10 @@ DigitalOut * findPinDropper(uint8_t data){
   switch (data)
   {
   case DATA_IO_DROPPER_STARBOARD:
+    pin = &DropperStarboard;
+    break;
   case DATA_IO_DROPPER_PORT:
-    pin = &TorpedoStarboard;
+    pin = &DropperPort;
     break;
   
   default:
@@ -140,4 +141,9 @@ int main()
 
   thread_isAlive.start(callback(isAliveThread, &rs));
   thread_isAlive.set_priority(osPriorityHigh);
+  
+  ThisThread::sleep_for(5000);
+  DropperStarboard = 1;
+  ThisThread::sleep_for(COIL_ON_TIME);
+  DropperStarboard = 0;
 }
