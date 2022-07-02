@@ -5,6 +5,8 @@
  ***/
 
 #include "main.h"
+#include "Utility/utility.h"
+
 #define COIL_ON_TIME 500
 //RS485 declaration
 RS485 rs(SLAVE_IO);
@@ -15,6 +17,8 @@ Thread thDropperSTARBOARD;
 
 Thread thTorpedoPORT;
 Thread thTorpedoSTARBOARD;
+
+Thread thread_isAlive;
 
 
 
@@ -133,4 +137,7 @@ int main()
 
   thTorpedoSTARBOARD.start(threadTorpedoSTARBOARD);
   thTorpedoSTARBOARD.set_priority(osPriorityHigh);
+
+  thread_isAlive.start(callback(isAliveThread, &rs));
+  thread_isAlive.set_priority(osPriorityHigh);
 }
