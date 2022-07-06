@@ -118,23 +118,14 @@ void threadTorpedoSTARBOARD()
 int main()
 {
 
+  //default 
   DropperPort = 0;
   DropperStarboard = 0;
-
   TorpedoPort = 0;
   TorpedoStarboard = 0;
 
-
-
-  //Declaration of all the thread (linked to one function)
-  //thDropperPORT.start(threadDropperPORT);
-  //thDropperPORT.set_priority(osPriorityHigh);
-
   thDropperSTARBOARD.start(threadDropperSTARBOARD);
   thDropperSTARBOARD.set_priority(osPriorityHigh);
-
-  //thTorpedoPORT.start(threadTorpedoPORT);
-  //thTorpedoPORT.set_priority(osPriorityHigh);
 
   thTorpedoSTARBOARD.start(threadTorpedoSTARBOARD);
   thTorpedoSTARBOARD.set_priority(osPriorityHigh);
@@ -142,8 +133,4 @@ int main()
   thread_isAlive.start(callback(isAliveThread, &rs));
   thread_isAlive.set_priority(osPriorityHigh);
   
-  ThisThread::sleep_for(5000);
-  DropperStarboard = 1;
-  ThisThread::sleep_for(COIL_ON_TIME);
-  DropperStarboard = 0;
 }
