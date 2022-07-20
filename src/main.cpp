@@ -124,13 +124,16 @@ int main()
   TorpedoPort = 0;
   TorpedoStarboard = 0;
 
+  Watchdog &watchdog = Watchdog::get_instance();
+  watchdog.start(5000);
+
   thDropperSTARBOARD.start(threadDropperSTARBOARD);
   thDropperSTARBOARD.set_priority(osPriorityHigh);
 
   thTorpedoSTARBOARD.start(threadTorpedoSTARBOARD);
   thTorpedoSTARBOARD.set_priority(osPriorityHigh);
 
-  thread_isAlive.start(callback(isAliveThread, &rs));
+  thread_isAlive.start(callback(isAliveThread, &rs, watchdog));
   thread_isAlive.set_priority(osPriorityHigh);
   
 }
